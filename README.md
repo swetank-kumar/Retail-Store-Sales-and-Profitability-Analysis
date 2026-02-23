@@ -1,8 +1,8 @@
-# End-to-End Superstore Sales & Profitability Analysis 📊
+# End-to-End Retail Store Sales & Profitability Analysis 📊
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/swetank-jha)
 
 ## 🚀 Project Overview
-The Superstore is experiencing strong revenue growth but inconsistent profitability.  
+The store is experiencing strong revenue growth but inconsistent profitability.  
 This project is a **full-lifecycle BI solution** that analyzes **where profit is generated, where it is lost, and why**. It moves beyond simple reporting to provide diagnostic insights on discounting behavior, product mix, and regional performance.
 
 The solution is designed for **business decision-makers**, providing both an executive overview and a detailed diagnostic view using a robust backend architecture.
