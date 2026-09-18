@@ -1,126 +1,80 @@
-# End-to-End Retail Store Sales & Profitability Analysis 📊
+# Retail Store Sales & Profitability Analysis 📊
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/swetank-jha)
 
-## 🚀 Project Overview
-The store is experiencing strong revenue growth but inconsistent profitability.  
-This project is a **full-lifecycle BI solution** that analyzes **where profit is generated, where it is lost, and why**. It moves beyond simple reporting to provide diagnostic insights on discounting behavior, product mix, and regional performance.
+## What this project is about
+The store's sales were growing, but profit wasn't growing at the same pace. This project analyzes ~10,000 retail transactions to understand where profit was being generated, where losses were occurring, and how discounts and product categories affected profitability.
 
-The solution is designed for **business decision-makers**, providing both an executive overview and a detailed diagnostic view using a robust backend architecture.
+I used SQL to clean and prepare the data and Power BI to build an interactive dashboard for analyzing sales and profitability.
 
----
+## Tools I used
+- **MySQL** — data cleaning, transformation, and preparation
+- **SQL** — filtering, joins, grouping, aggregations, and basic calculations
+- **Power BI** — interactive dashboard and reporting
+- **DAX** — KPI calculations and year-over-year growth analysis
 
-## 🛠 Tech Stack & Architecture
+## What I did
 
-**Database & ETL**
-- **MySQL:** Used for data ingestion, cleaning, and type enforcement (ETL).
-- **SQL (DDL/DML):** Feature engineering and creating the relational structure.
+### 1. Cleaned the data in SQL
+- Fixed inconsistent date formats
+- Corrected columns stored as text instead of numbers
+- Checked for missing and inconsistent values
+- Standardized data before using it for reporting
 
-**Data Modeling**
-- **Star Schema:** Optimized Fact/Dimension model to ensure high performance in Power BI.
-- **Data Quality (DQ):** Handling nulls, distinct counts, and standardizing date formats.
+### 2. Created calculated fields
+I created additional fields to support the analysis, including:
+- Profit Margin %
+- Profit/Loss/Neutral order status
+- Unit-level calculations used for profitability analysis
 
-**Visualization**
-- **Power BI:** Dashboard development and interactive reporting.
-- **DAX:** Complex measures (CALCULATE, Time Intelligence) for KPI logic.
+### 3. Organized the data for Power BI
+Instead of keeping everything in one large table, I organized the data into connected tables for:
+- Customers
+- Products
+- Locations
+- Dates
+- Sales transactions
 
-**Architecture**
-- Decoupled Pipeline: **Raw Data → SQL Staging → Cleaned Production Tables → Power BI**
+This follows a simple approach — one main sales table linked to smaller tables like customers, products, and dates and makes the Power BI model easier to manage and analyze.
 
----
+### 4. Built the Power BI dashboard
+The dashboard contains two main pages focused on overall performance and profitability.
 
-## ⚙️ The Data Pipeline (End-to-End Workflow)
+## Dashboard Pages
 
-This project simulates a real-world Business Intelligence workflow, ensuring data integrity before visualization.
+### Page 1: Overview
+A high-level view of business performance, including:
+- Total Sales
+- Total Profit
+- Number of Orders
+- Average Order Value
+- Year-over-Year Growth
+- Regional performance
+- Sales and profit trends
 
-### 1️⃣ Data Staging & Quality Checks (MySQL)
-- Imported raw sales data into a staging table (`raw_superstore_data`).
-- **Data Quality Audit:** Identified and fixed inconsistencies (e.g., text-based dates, numeric values stored as strings).
-- **Type Enforcement:** Designed a strict schema to prevent bad data from entering the reporting layer.
+### Page 2: Where the losses are coming from
+A detailed view focused on profitability, including:
+- Relationship between discounts and profit
+- Product/category profitability
+- Loss-making orders
+- Customers and their contribution to revenue and profit
 
-### 2️⃣ Feature Engineering & Transformation
-ETL logic applied to create analytics-ready data:
-- **Profit Status Logic:** Categorized orders as 'Profit', 'Loss', or 'Neutral' at the database level.
-- **Metric Calculation:** Calculated `Unit Price` and `Margin %` row-by-row to avoid aggregation errors.
-- **Date Standardization:** Unified formats into SQL `DATE` type for accurate Time Intelligence analysis.
+## What I found
+- **Discounting pattern:** In this dataset, discounts above approximately 20% were frequently associated with negative profitability across many categories.
+- **Product mix:** Tables and Bookcases were among the major loss-making areas, particularly when sold at higher discounts.
+- **Loss-making orders:** Approximately 19% of orders in the dataset were classified as loss-making.
 
-### 3️⃣ Visualization Layer (Power BI)
-- Connected Power BI to the **Star Schema** (Fact + Dimensions) rather than a flat file.
-- **Performance Optimization:** Minimized calculated columns by moving logic to SQL/Power Query.
-- **KPIs Created:**
-  - Revenue YoY %
-  - Weighted Margin %
-  - Loss Order %
-  - Average Profit per Order
+## What I'd suggest based on this analysis
+1. Review or require additional approval for higher discounts, particularly around the 15–20% range.
+2. Review pricing or bundling strategies for loss-making product categories such as Tables and Bookcases.
+3. Track the percentage of loss-making orders as a regular business KPI.
+4. Monitor profitability alongside sales growth rather than relying on revenue alone.
 
----
+## Dashboard Screenshots
 
-## 📊 Dashboard Structure
-
-### Page 1: Executive Overview
-**Purpose:** High-level performance monitoring for leadership.
-
-**Key Visuals**
-- **KPI Cards:** Total Sales, Profit, Orders, AOV, and YoY Growth.
-- **Trend Analysis:** Sales vs. Profit over time.
-- **Regional Performance:** Map and bar charts identifying high-value regions.
-- **Segment Analysis:** Profit contribution by Consumer, Corporate, and Home Office.
-
-**Key Business Questions**
-- Are we growing year-over-year?
-- Is revenue growth translating into actual profit?
-- Which regions are underperforming?
-
----
-
-### Page 2: Profitability Diagnostics
-**Purpose:** Root cause analysis for operational teams.
-
-**Key Visuals**
-- **Discount vs. Profit Scatter Plot:** Identifies the "break-even" discount threshold.
-- **Product Matrix:** Sub-category analysis (Table vs. Matrix) to spot loss-makers.
-- **Loss Analysis:** Percentage of loss-making orders by category.
-- **Customer Insights:** Top 10 Customers by Profit vs. Revenue.
-
-**Key Business Questions**
-- At what discount level do we start losing money?
-- Which specific products (e.g., Tables) are destroying margins?
-- How much operational risk exists in our current discounting strategy?
-
----
-
-## 🔍 Key Insights & Outcomes
-- **The 20% Rule:** Discounts above ~20% consistently result in negative margins across all categories.
-- **Product Mix Issues:** 'Tables' and 'Bookcases' are primary loss drivers, often sold at deep discounts.
-- **Operational Risk:** Approximately **19% of all orders** are loss-making, indicating a need for stricter pricing controls.
-
----
-
-## 💡 Business Recommendations
-1. **Pricing Governance:** Introduce approval workflows for discounts above 15–20%.
-2. **Catalog Optimization:** Reprice or bundle loss-making sub-categories (Tables).
-3. **Risk Monitoring:** Track "Loss Order %" as a primary risk KPI in monthly reviews.
-4. **Targeting:** Focus retention efforts on the high-margin "Corporate" segment.
-
----
-
-## 📸 Dashboard Screenshots
-### Executive Overview
+### Overview
 ![Executive Dashboard](./Visuals/1.Overview.png)
 
-### Profitability Details
+### Where the losses are coming from
 ![Profitability Diagnostics](./Visuals/2.Details.png)
----
 
-## 📐 Data Model (Star Schema)
-To optimize performance and simplify DAX calculations, I designed a **Star Schema** rather than using a flat table.
-
-**Schema Details:**
-- **Fact Table:** `Fact_Sales` (Contains quantitative data: Sales, Profit, Quantity)
-- **Dimension Tables:** `Dim_Customer`, `Dim_Product`, `Dim_Location`, `Dim_Date`
-- **Relationships:** 1-to-Many (1:*) relationships connected via surrogate keys.
-
-![Star Schema Data Model](./Visuals/3.Data_Model.png)
-
----
-👤 Author
-Swetank Kumar Jha (https://www.linkedin.com/in/swetank-jha)
+👤 **Author:** Swetank Kumar Jha ([LinkedIn](https://www.linkedin.com/in/swetank-jha))
